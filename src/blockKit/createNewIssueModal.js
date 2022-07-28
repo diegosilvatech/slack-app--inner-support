@@ -6,7 +6,7 @@ async function createNewIssueModal(client, body) {
       callback_id: 'create_new_issue',
       title: {
         type: 'plain_text',
-        text: 'HAHA Support Backlog',
+        text: 'Inner Support',
         emoji: true
       },
       submit: {
@@ -53,24 +53,24 @@ async function createNewIssueModal(client, body) {
             initial_option: {
               text: {
                 type: 'plain_text',
-                text: 'slack-app_support-backlog',
+                text: 'slack-app_inner-support',
                 emoji: true
               },
-              value: 'slack-app_support-backlog'
+              value: 'slack-app_inner-support'
             },
             placeholder: {
               type: 'plain_text',
-              text: 'Ex: slack-app_support-backlog',
+              text: 'Ex: slack-app_inner-support',
               emoji: true
             },
             options: [
               {
                 text: {
                   type: 'plain_text',
-                  text: 'slack-app_support-backlog',
+                  text: 'slack-app_inner-support',
                   emoji: true
                 },
-                value: 'slack-app_support-backlog'
+                value: 'slack-app_inner-support'
               }
             ]
           }

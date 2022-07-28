@@ -1,7 +1,7 @@
 const { createNewIssueModal } = require('../blockKit');
 
 function initCommands(app) {
-  app.command('/support', async ({ ack, client, command, body }) => {
+  app.command('/inner', async ({ ack, client, command, body }) => {
     try {
       if (command.text === 'issues --new') {
         await ack();
