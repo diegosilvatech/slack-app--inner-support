@@ -1,0 +1,23 @@
+{
+  "name": "inner-support",
+  "version": "1.0.0",
+  "description": "Inner Support | Github <> Slack",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@slack/bolt": "^3.12.0",
+    "axios": "^0.27.2",
+    "slack-block-builder": "^2.6.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.1",
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1"
+  }
+}
