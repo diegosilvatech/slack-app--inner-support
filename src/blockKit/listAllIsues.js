@@ -12,7 +12,7 @@ const getIssueSection = (issue) => {
       },
       {
         type: 'mrkdwn',
-        text: `*SOLICITANTE:*\n${issue.user.login}`
+        text: `*SOLICITANTE*\n${issue.user.login}`
       },
       {
         type: 'mrkdwn',
