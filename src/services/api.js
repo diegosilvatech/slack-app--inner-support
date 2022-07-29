@@ -1,5 +1,7 @@
 const axios = require('axios');
 
+require('dotenv').config();
+
 const api = axios.create({
   baseURL: 'https://api.github.com',
   headers: {
@@ -7,17 +9,17 @@ const api = axios.create({
   }
 });
 
-async function getGithubRepoIssues() {
+async function getRepositoryIssues() {
   try {
-    const issues = await api.get(
-      `/repos/${process.env.GITHUB_REPO_NAME}/issues`
-    );
+    const repositoryUrl = `/repos/${process.env.GITHUB_REPO_NAME}/issues`;
+    const issues = await api.get(repositoryUrl);
+
     return issues.data;
   } catch (error) {
-    console.log('ERROR');
+    console.log('ERROR:', error);
   }
 }
 
 module.exports = {
-  getGithubRepoIssues
+  getRepositoryIssues
 };

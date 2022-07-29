@@ -4,25 +4,25 @@ const getIssueSection = (issue) => {
     fields: [
       {
         type: 'mrkdwn',
-        text: `*Título:*\n${issue.title}`
+        text: `*TÍTULO*\n${issue.title}`
       },
       {
         type: 'mrkdwn',
-        text: `*Situação:*\n${issue.state}`
+        text: `*SITUAÇÃO*\n${issue.state}`
       },
       {
         type: 'mrkdwn',
-        text: `*Solicitante:*\n${issue.user.login}`
+        text: `*SOLICITANTE:*\n${issue.user.login}`
       },
       {
         type: 'mrkdwn',
-        text: `*Descrição:*\n${issue.body}`
+        text: `*DESCRIÇÃO*\n${issue.body}`
       }
     ]
   };
 };
 
-const listAllIssues = async (issues, say) => {
+const listAllIssues = async (issues) => {
   const getIssuesSections = (issues) => {
     return issues.map((issue) => getIssueSection(issue));
   };
@@ -54,11 +54,10 @@ const listAllIssues = async (issues, say) => {
       },
       ...newIssuesSections
     ],
-
-    text: `issues --list`
+    text: 'issues --list'
   };
 
-  await say(response);
+  return response;
 };
 
 module.exports = {
