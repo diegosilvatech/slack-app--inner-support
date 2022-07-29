@@ -20,6 +20,29 @@ async function getRepositoryIssues() {
   }
 }
 
+async function createNewRepositoryIssue(issueTitle, issueBody, issueLabels) {
+  try {
+    const repositoryUrl = `/repos/${process.env.GITHUB_REPO_NAME}/issues`;
+    const issue = await api.post(
+      repositoryUrl,
+      {
+        title: issueTitle,
+        body: issueBody,
+        labels: issueLabels
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    return issue;
+  } catch (error) {
+    console.log('ERROR:', error);
+  }
+}
+
 module.exports = {
-  getRepositoryIssues
+  getRepositoryIssues,
+  createNewRepositoryIssue
 };
