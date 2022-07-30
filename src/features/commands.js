@@ -1,4 +1,4 @@
-const { createNewIssueModal, listAllIssues } = require('../blockKit');
+const { createNewIssue, listAllIssues } = require('../block-kit');
 const { getRepositoryIssues } = require('../services/api');
 
 function initCommands(app) {
@@ -6,7 +6,7 @@ function initCommands(app) {
     try {
       if (command.text === 'issues --new') {
         await ack();
-        await createNewIssueModal(client, body);
+        await createNewIssue(client, body);
       }
 
       if (command.text === 'issues --list') {

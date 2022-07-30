@@ -20,7 +20,11 @@ async function getRepositoryIssues() {
   }
 }
 
-async function createNewRepositoryIssue(issueTitle, issueBody, issueLabels) {
+async function postCreateNewRepositoryIssue(
+  issueTitle,
+  issueBody,
+  issueLabels
+) {
   try {
     const repositoryUrl = `/repos/${process.env.GITHUB_REPO_NAME}/issues`;
     const issue = await api.post(
@@ -44,5 +48,5 @@ async function createNewRepositoryIssue(issueTitle, issueBody, issueLabels) {
 
 module.exports = {
   getRepositoryIssues,
-  createNewRepositoryIssue
+  postCreateNewRepositoryIssue
 };

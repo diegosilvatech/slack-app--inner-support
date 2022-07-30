@@ -1,5 +1,5 @@
-const { getFieldDataValue } = require('../helpers/getFieldValue');
-const { createNewRepositoryIssue } = require('../services/api');
+const { getFieldDataValue } = require('../helpers/get-field-value');
+const { postCreateNewRepositoryIssue } = require('../services/api');
 
 function initViews(app) {
   app.view('create_new_issue', async ({ view }) => {
@@ -7,15 +7,13 @@ function initViews(app) {
       const { repositoryName, issueTitle, issueDescription, issueLabel } =
         view.state.values;
 
-      await createNewRepositoryIssue(issueTitle, issueDescription, [
-        issueLabel
-      ]);
-
-      const issue = await createNewRepositoryIssue(
+      await postCreateNewRepositoryIssue(
         getFieldDataValue(issueTitle),
         getFieldDataValue(issueDescription),
         [getFieldDataValue(issueLabel)]
       );
+
+      await console.log('issue created!');
     } catch (error) {
       console.log('ERROR:', error);
     }
