@@ -17,9 +17,7 @@ jobs:
         SLACK_COLOR: ${{ job.status }}
         SLACK_ICON: https://github.com/diegosilvatech/slack-app_inner-support/blob/master/src/assets/inner-support-logo.png?raw=true
         SLACK_TITLE: ${{ github.event.issue.title }}
-        # SLACK_MESSAGE: ${{ github.event.issue.body }}
-        SLACK_MESSAGE: "MESSAGE: ${{ job.status }}\n
-          TÍTULO: ${{ github.event.issue.title }}\n
+        SLACK_MESSAGE: "TÍTULO: ${{ github.event.issue.title }}\n
           DESCRIÇÃO: ${{ github.event.issue.body }}\n
           STATUS: ${{ github.event.issue.state }}"
         SLACK_FOOTER: 'Link da issue: ${{ github.event.issue.html_url }}'
