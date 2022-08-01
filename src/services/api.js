@@ -56,7 +56,6 @@ async function notifyNewIssueCreated(text, blocks) {
       text: text,
       blocks: blocks
     };
-    console.log('payload:', payload);
     const response = await slackApi.post(webhookUrl, payload);
     return response;
   } catch (error) {
