@@ -1,15 +1,16 @@
-const blockNewIssueCreated = (issue) => {
+const blockNewIssueCreated = (issue, user) => {
   const { data } = issue;
-  const { title, body, labels, state, html_url, user } = data;
+  const { title, body, state, labels, html_url } = data;
 
   return [
     {
       type: 'context',
       elements: [
         {
-          type: 'plain_text',
-          text: `Uma nova ISSUE foi criada:`,
-          emoji: false
+          type: 'mrkdwn',
+          text: `Uma nova ISSUE foi criada por com as seguintes categorias: ${[
+            ...labels.map((label) => label.name)
+          ]}`
         }
       ]
     },
@@ -30,7 +31,7 @@ const blockNewIssueCreated = (issue) => {
         },
         {
           type: 'mrkdwn',
-          text: `*SOLICITANTE*\n${user.login}`
+          text: `*SOLICITANTE*\n<@${user.user_id}|${user.name}>`
         }
       ]
     },

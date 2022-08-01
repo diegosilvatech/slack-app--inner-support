@@ -23,7 +23,7 @@ async function getAllIssues() {
 
     return issues.data;
   } catch (error) {
-    console.log('ERROR:', error);
+    console.error('ERROR:', error);
   }
 }
 
@@ -45,7 +45,7 @@ async function createNewIssue(issueTitle, issueBody, issueLabels) {
     );
     return issue;
   } catch (error) {
-    console.log('ERROR:', error);
+    console.error('ERROR:', error);
   }
 }
 
@@ -59,7 +59,7 @@ async function notifyNewIssueCreated(text, blocks) {
     const response = await slackApi.post(webhookUrl, payload);
     return response;
   } catch (error) {
-    console.log('ERROR:', error.code);
+    console.error('ERROR:', error.code);
   }
 }
 

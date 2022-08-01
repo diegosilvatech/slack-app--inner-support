@@ -20,6 +20,9 @@ oauth_config:
       - commands
       - im:history
       - links:read
+      - users:read
+      - users:read.email
+      - users.profile:read
 settings:
   event_subscriptions:
     bot_events:

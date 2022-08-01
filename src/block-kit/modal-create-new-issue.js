@@ -40,42 +40,6 @@ async function modalCreateNewIssue(client, body) {
           type: 'divider'
         },
         {
-          block_id: 'repositoryName',
-          type: 'input',
-          label: {
-            type: 'plain_text',
-            text: 'Selecione o repositório para o qual você deseja suporte:',
-            emoji: true
-          },
-          element: {
-            action_id: 'data',
-            type: 'static_select',
-            initial_option: {
-              text: {
-                type: 'plain_text',
-                text: 'slack-app_inner-support',
-                emoji: true
-              },
-              value: 'slack-app_inner-support'
-            },
-            placeholder: {
-              type: 'plain_text',
-              text: 'Ex: slack-app_inner-support',
-              emoji: true
-            },
-            options: [
-              {
-                text: {
-                  type: 'plain_text',
-                  text: 'slack-app_inner-support',
-                  emoji: true
-                },
-                value: 'slack-app_inner-support'
-              }
-            ]
-          }
-        },
-        {
           block_id: 'issueTitle',
           type: 'input',
           hint: {
@@ -137,6 +101,14 @@ async function modalCreateNewIssue(client, body) {
           element: {
             action_id: 'data',
             type: 'static_select',
+            initial_option: {
+              text: {
+                type: 'plain_text',
+                text: 'bug',
+                emoji: true
+              },
+              value: 'bug'
+            },
             placeholder: {
               type: 'plain_text',
               text: ' ',

@@ -3,7 +3,7 @@ const { createNewIssue, notifyNewIssueCreated } = require('../services/api');
 const { blockNewIssueCreated } = require('../block-kit');
 
 function initViews(app) {
-  app.view('create_new_issue', async ({ view }) => {
+  app.view('create_new_issue', async ({ view, body }) => {
     try {
       const { issueTitle, issueDescription, issueLabel } = view.state.values;
 
@@ -13,9 +13,16 @@ function initViews(app) {
         [getFieldDataValue(issueLabel)]
       );
 
-      await notifyNewIssueCreated('TEXTO', blockNewIssueCreated(issue));
+      const user = {
+        user_id: body.user.id,
+        username: body.user.username,
+        name: body.user.name,
+        team_id: body.user.team_id
+      };
+
+      await notifyNewIssueCreated('TEXTO', blockNewIssueCreated(issue, user));
     } catch (error) {
-      console.log('ERROR:', error.code);
+      console.error('ERROR:', error.code);
     }
   });
 }
