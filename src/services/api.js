@@ -27,6 +27,17 @@ async function getAllIssues() {
   }
 }
 
+async function getIssuesByState(state = 'open') {
+  try {
+    const searchUrl = `/search/issues?q=is:issue%20repo:${process.env.GITHUB_REPO_NAME}%20state:${state}`;
+    const issues = await githubApi.get(searchUrl);
+
+    return issues.data;
+  } catch (error) {
+    console.error('ERROR:', error);
+  }
+}
+
 async function createNewIssue(issueTitle, issueBody, issueLabels) {
   try {
     const repositoryUrl = `/repos/${process.env.GITHUB_REPO_NAME}/issues`;
@@ -66,5 +77,6 @@ async function notifyNewIssueCreated(text, blocks) {
 module.exports = {
   getAllIssues,
   createNewIssue,
+  getIssuesByState,
   notifyNewIssueCreated
 };
