@@ -2,17 +2,24 @@ const axios = require('axios');
 
 require('dotenv').config();
 
-const api = axios.create({
+const githubApi = axios.create({
   baseURL: 'https://api.github.com',
   headers: {
     Authorization: `token ${process.env.GITHUB_PERSONAL_PERSONAL_ACCESS_TOKEN_SUPPORT}`
   }
 });
 
-async function getRepositoryIssues() {
+const slackApi = axios.create({
+  baseURL: 'https://hooks.slack.com/services',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+
+async function getAllIssues() {
   try {
     const repositoryUrl = `/repos/${process.env.GITHUB_REPO_NAME}/issues`;
-    const issues = await api.get(repositoryUrl);
+    const issues = await githubApi.get(repositoryUrl);
 
     return issues.data;
   } catch (error) {
@@ -20,14 +27,10 @@ async function getRepositoryIssues() {
   }
 }
 
-async function postCreateNewRepositoryIssue(
-  issueTitle,
-  issueBody,
-  issueLabels
-) {
+async function createNewIssue(issueTitle, issueBody, issueLabels) {
   try {
     const repositoryUrl = `/repos/${process.env.GITHUB_REPO_NAME}/issues`;
-    const issue = await api.post(
+    const issue = await githubApi.post(
       repositoryUrl,
       {
         title: issueTitle,
@@ -46,7 +49,23 @@ async function postCreateNewRepositoryIssue(
   }
 }
 
+async function notifyNewIssueCreated(text, blocks) {
+  try {
+    const webhookUrl = `/${process.env.INNER_SUPPORT_TEAM_SLACK_CHANNEL_WEBHOOK}`;
+    const payload = {
+      text: text,
+      blocks: blocks
+    };
+    console.log('payload:', payload);
+    const response = await slackApi.post(webhookUrl, payload);
+    return response;
+  } catch (error) {
+    console.log('ERROR:', error.code);
+  }
+}
+
 module.exports = {
-  getRepositoryIssues,
-  postCreateNewRepositoryIssue
+  getAllIssues,
+  createNewIssue,
+  notifyNewIssueCreated
 };

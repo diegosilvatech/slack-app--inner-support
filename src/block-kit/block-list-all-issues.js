@@ -22,7 +22,7 @@ const getIssueSection = (issue) => {
   };
 };
 
-const listAllIssues = async (issues) => {
+const blockListAllIssues = async (issues) => {
   const getIssuesSections = (issues) => {
     return issues.map((issue) => getIssueSection(issue));
   };
@@ -61,5 +61,5 @@ const listAllIssues = async (issues) => {
 };
 
 module.exports = {
-  listAllIssues
+  blockListAllIssues
 };

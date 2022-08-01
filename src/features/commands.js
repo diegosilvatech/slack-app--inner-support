@@ -1,18 +1,18 @@
-const { createNewIssue, listAllIssues } = require('../block-kit');
-const { getRepositoryIssues } = require('../services/api');
+const { modalCreateNewIssue, blockListAllIssues } = require('../block-kit');
+const { getAllIssues } = require('../services/api');
 
 function initCommands(app) {
   app.command('/inner', async ({ ack, client, command, body, say }) => {
     try {
       if (command.text === 'issues --new') {
         await ack();
-        await createNewIssue(client, body);
+        await modalCreateNewIssue(client, body);
       }
 
       if (command.text === 'issues --list') {
         await ack();
-        const repositoryIssues = await getRepositoryIssues();
-        const commandResponse = await listAllIssues(repositoryIssues);
+        const repositoryIssues = await getAllIssues();
+        const commandResponse = await blockListAllIssues(repositoryIssues);
         await say(commandResponse);
       }
     } catch (error) {

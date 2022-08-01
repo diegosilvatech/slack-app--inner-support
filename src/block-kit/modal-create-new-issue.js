@@ -1,4 +1,4 @@
-async function createNewIssue(client, body) {
+async function modalCreateNewIssue(client, body) {
   await client.views.open({
     trigger_id: body.trigger_id,
     view: {
@@ -168,5 +168,5 @@ async function createNewIssue(client, body) {
 }
 
 module.exports = {
-  createNewIssue
+  modalCreateNewIssue
 };
