@@ -12,7 +12,7 @@ const getIssueSection = (issue) => {
       },
       {
         type: 'mrkdwn',
-        text: `*SOLICITANTE*\n<@${issue.user.login}>`
+        text: `*SOLICITANTE*\n<${issue.user.html_url}|@${issue.user.login}>`
       },
       {
         type: 'mrkdwn',
@@ -32,12 +32,21 @@ const blockListIssuesByState = async (issues, state) => {
   for (let i = 0; i < issuesSections.length; i++) {
     newIssuesSections.push(issuesSections[i]);
     newIssuesSections.push({
-      type: 'divider'
+      type: 'context',
+      elements: [
+        {
+          type: 'mrkdwn',
+          text: `Link da issue: <${items[i].html_url}|${items[i].title}>`
+        }
+      ]
     });
   }
 
   const response = {
     blocks: [
+      {
+        type: 'divider'
+      },
       {
         type: 'context',
         elements: [
@@ -48,10 +57,10 @@ const blockListIssuesByState = async (issues, state) => {
           }
         ]
       },
+      ...newIssuesSections,
       {
         type: 'divider'
-      },
-      ...newIssuesSections
+      }
     ],
     text: 'issues --list'
   };
