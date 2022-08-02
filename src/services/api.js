@@ -10,7 +10,6 @@ const githubApi = axios.create({
 });
 
 const slackApi = axios.create({
-  baseURL: 'https://hooks.slack.com/services',
   headers: {
     'Content-Type': 'application/json'
   }
@@ -62,7 +61,7 @@ async function createNewIssue(issueTitle, issueBody, issueLabels) {
 
 async function notifyNewIssueCreated(text, blocks) {
   try {
-    const webhookUrl = `/${process.env.INNER_SUPPORT_TEAM_SLACK_CHANNEL_WEBHOOK}`;
+    const webhookUrl = process.env.INNER_SUPPORT_TEAM_SLACK_CHANNEL_WEBHOOK;
     const payload = {
       text: text,
       blocks: blocks
