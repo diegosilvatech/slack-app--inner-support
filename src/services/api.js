@@ -56,8 +56,6 @@ async function createNewIssue(issueTitle, issueBody, issueLabels) {
       labels: issueLabels.map((label) => label.value)
     };
 
-    console.log('PRINT', payload);
-
     const repositoryUrl = `/repos/${process.env.GITHUB_REPO_NAME}/issues`;
     const issue = await githubApi.post(repositoryUrl, payload, {
       headers: {

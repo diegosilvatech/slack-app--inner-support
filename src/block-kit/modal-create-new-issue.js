@@ -1,4 +1,16 @@
-async function modalCreateNewIssue(client, body) {
+const getLabelOption = (label) => {
+  return {
+    text: {
+      type: 'plain_text',
+      text: `${label.name}`
+    },
+    value: `${label.name}`
+  };
+};
+
+async function modalCreateNewIssue(client, body, repositoryLabels) {
+  const labelsOptions = repositoryLabels.map((label) => getLabelOption(label));
+
   await client.views.open({
     trigger_id: body.trigger_id,
     view: {
@@ -110,31 +122,9 @@ async function modalCreateNewIssue(client, body) {
                   type: 'plain_text'
                 },
                 value: 'bug'
-              },
-              {
-                text: {
-                  text: 'documentação',
-                  type: 'plain_text'
-                },
-                value: 'documentation'
               }
             ],
-            options: [
-              {
-                text: {
-                  type: 'plain_text',
-                  text: 'bug'
-                },
-                value: 'bug'
-              },
-              {
-                text: {
-                  type: 'plain_text',
-                  text: 'documentação'
-                },
-                value: 'documentation'
-              }
-            ],
+            options: labelsOptions,
             action_id: 'data'
           }
         }
