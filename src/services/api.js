@@ -26,6 +26,17 @@ async function getAllIssues() {
   }
 }
 
+async function getAllLabels() {
+  try {
+    const labelsUrl = `/repos/${process.env.GITHUB_REPO_NAME}/labels`;
+    const labels = await githubApi.get(labelsUrl);
+
+    return labels.data;
+  } catch (error) {
+    console.error('ERROR:', error);
+  }
+}
+
 async function getIssuesByState(state = 'open') {
   try {
     const searchUrl = `/search/issues?q=is:issue%20repo:${process.env.GITHUB_REPO_NAME}%20state:${state}`;
@@ -39,20 +50,20 @@ async function getIssuesByState(state = 'open') {
 
 async function createNewIssue(issueTitle, issueBody, issueLabels) {
   try {
+    const payload = {
+      title: issueTitle,
+      body: issueBody,
+      labels: issueLabels.map((label) => label.value)
+    };
+
+    console.log('PRINT', payload);
+
     const repositoryUrl = `/repos/${process.env.GITHUB_REPO_NAME}/issues`;
-    const issue = await githubApi.post(
-      repositoryUrl,
-      {
-        title: issueTitle,
-        body: issueBody,
-        labels: issueLabels
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json'
-        }
+    const issue = await githubApi.post(repositoryUrl, payload, {
+      headers: {
+        'Content-Type': 'application/json'
       }
-    );
+    });
     return issue;
   } catch (error) {
     console.error('ERROR:', error);
@@ -75,6 +86,7 @@ async function notifyNewIssueCreated(text, blocks) {
 
 module.exports = {
   getAllIssues,
+  getAllLabels,
   createNewIssue,
   getIssuesByState,
   notifyNewIssueCreated

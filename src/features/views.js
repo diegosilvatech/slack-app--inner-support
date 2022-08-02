@@ -5,12 +5,12 @@ const { blockNewIssueCreated } = require('../block-kit');
 function initViews(app) {
   app.view('create_new_issue', async ({ view, body }) => {
     try {
-      const { issueTitle, issueDescription, issueLabel } = view.state.values;
+      const { issueTitle, issueDescription, issueLabels } = view.state.values;
 
       const issue = await createNewIssue(
         getFieldDataValue(issueTitle),
         getFieldDataValue(issueDescription),
-        [getFieldDataValue(issueLabel)]
+        getFieldDataValue(issueLabels)
       );
 
       const user = {

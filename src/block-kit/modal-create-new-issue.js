@@ -86,52 +86,56 @@ async function modalCreateNewIssue(client, body) {
           }
         },
         {
-          block_id: 'issueLabel',
+          block_id: 'issueLabels',
           type: 'input',
+          label: {
+            type: 'plain_text',
+            text: 'Selecione uma Label para a sua issue:'
+          },
           hint: {
             type: 'plain_text',
             text: 'Ex: bug, documentação, melhoria',
             emoji: true
           },
-          label: {
-            type: 'plain_text',
-            text: 'Selecione uma Label para a sua issue:',
-            emoji: true
-          },
           element: {
-            action_id: 'data',
-            type: 'static_select',
-            initial_option: {
-              text: {
-                type: 'plain_text',
-                text: 'bug',
-                emoji: true
-              },
-              value: 'bug'
-            },
+            type: 'multi_static_select',
             placeholder: {
               type: 'plain_text',
-              text: ' ',
-              emoji: true
+              text: ' '
             },
+            initial_options: [
+              {
+                text: {
+                  text: 'bug',
+                  type: 'plain_text'
+                },
+                value: 'bug'
+              },
+              {
+                text: {
+                  text: 'documentação',
+                  type: 'plain_text'
+                },
+                value: 'documentation'
+              }
+            ],
             options: [
               {
                 text: {
                   type: 'plain_text',
-                  text: 'bug',
-                  emoji: true
+                  text: 'bug'
                 },
                 value: 'bug'
               },
               {
                 text: {
                   type: 'plain_text',
-                  text: 'documentação',
-                  emoji: true
+                  text: 'documentação'
                 },
                 value: 'documentation'
               }
-            ]
+            ],
+            action_id: 'data'
           }
         }
       ]
